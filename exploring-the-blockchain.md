@@ -64,6 +64,14 @@ You can then get the information about a given block, say block 1830000.
 }
 ```
 
+Notice that the miner address is `"0x0000...0000"` and the nonce is also zeros. This is because the Rinkeby network does not run on proof of work. Rinkeby is a proof-of-authority test network running the Clique consensus protocol. A proof-of-authority network relies on trusted nodes designated as “signers” that have the ability to create blocks. A majority of signers on the network are required to validate the chain. Rinkeby has seven designated signers maintained by the following groups:
+
+- Ethereum Foundation (3)
+- Infura (1)
+- Oraclize (1)
+- Augur (1)
+- Akasha (1)
+
 #### Retrieving Transaction data
 
 You can get the information about any transactions from your local node as well, say transaction at index 0 of block 1830000.
