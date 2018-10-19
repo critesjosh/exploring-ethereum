@@ -1,6 +1,6 @@
 # Setting up `Geth` and sending transactions
 
-Geth is the the command line interface for running a full ethereum node implemented in Go. This is your local portal to the Ethereum network. When you are running a local Ethereum node, you do not need to rely on any 3rd party service to connect to the Ethereum blockchain, this is what makes the network “trustless”.
+Geth (Go-Ethereum) is a command line interface for running a full ethereum node implemented in Go. This is your local portal to the Ethereum network. When you are running a local Ethereum node, you do not need to rely on any 3rd party service to connect to the Ethereum blockchain, this is what makes the network “trustless”.
 
 ### Capabilities
 
@@ -131,7 +131,7 @@ You can check the balance of an account with the `eth.getBalance()` method and e
 
 ### Mining the private chain
 
-Since the private blockchain is maintaing consensus using proof of work, we need to mine new blocks in order to process transactions.
+Since the private blockchain is maintaining consensus using proof of work, we need to mine new blocks in order to process transactions.
 
 To start mining, just run `miner.start()`. Geth needs to build a DAG before the miner starts, but once it does that it will start mining blocks on the private chain. After a few blocks are mined, stop it with `miner.stop()`. [See this link](https://ethereum.stackexchange.com/questions/1993/what-actually-is-a-dag) for more information about what is going on when geth is creating a DAG.
 
@@ -139,7 +139,7 @@ Check the ether balance of you first account now. It should  contain some ether.
 
 ### Sending a transaction
 
-Now that we have some ether in our account, we can send some to another account. For this we can use the `eth.sendTransaction()` method that takes a transaction object.
+Now that we have some ether in our account, we can send some to another account. For this we can use the geth console and input the `eth.sendTransaction()` method that takes a transaction object.
 
 An ethereum transaction is composed of the following data:
 ```
