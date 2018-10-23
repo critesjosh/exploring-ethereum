@@ -8,8 +8,6 @@ A **"fast"** sync gets the block headers, the block bodies, it processes no tran
 
 A **"light"** sync gets only the current state. To verify elements, it needs to ask to full (archive) nodes for the corresponding tree leaves.
 
-(Note to Josh: There's a great comment covering the big syncing issue many people have in [this comment from an Ethereum developer.](https://github.com/ethereum/mist/issues/3738#issuecomment-390892738), might be worth including?)
-
 In this exercise, we will use "light" sync because it is the fastest.
 
 ## Connect to a testnet
