@@ -1,10 +1,10 @@
 # Connecting to Testnets and Exploring the Blockchain with Geth
 
-`geth` is your portal to any Ethereum network. It can take a long time and a lot of storage to sync a full geth node, so there are several sync options that geth comes with. 
+`geth` is your portal to any Ethereum network. It can take a long time and a lot of storage to sync a full geth node, so there are several sync options that geth comes with.
 
-A **"full"** sync gets the block headers, the block bodies, and validates every element from genesis block. (I think this is also called an "archive" node?)
+A **"full"** sync gets the block headers, the block bodies, and validates every element from genesis block. This runs a full node on your machine, which keeps the entire current state of the blockchain and validates incoming blocks. This is not to be confused with an archive node, which does this but also stores the entire transaction history of the blockchain.
 
-A **"fast"** sync gets the block headers, the block bodies, it processes no transactions until current block - 64. Then it gets a snapshot state and goes like a full synchronization.
+A **"fast"** sync gets the block headers, the block bodies, it processes no transactions until current block - 64. Then it gets a snapshot state and goes like a full synchronization. During a fast sync, you can get all of the blocks while still not be completely in sync because the account state may still not be available (ie. balances, nonces, smart contract code and data). These need to be downloaded separately and cross checked with the latest blocks. This phase is called the state trie download and it actually runs concurrently with the block downloads and it can take a lot longer nowadays than downloading the blocks.  
 
 A **"light"** sync gets only the current state. To verify elements, it needs to ask to full (archive) nodes for the corresponding tree leaves.
 
@@ -12,19 +12,24 @@ A **"light"** sync gets only the current state. To verify elements, it needs to 
 
 In this exercise, we will use "light" sync because it is the fastest.
 
-### Connect to a testnet
+## Connect to a testnet
 
-Connecting to testnet with geth is very simple. To connect to the Rinkeby testnet, simple run (??). We will also launch the console so we can interact with the testnet from the terminal. 
-```
+Connecting to testnet with geth is very simple. To connect to the Rinkeby testnet, simply run the following in the command line. We will also add options to launch the console so we can interact with the testnet from the terminal.
+
+```bash
 $ geth --rinkeby --syncmode fast console
 ```
+
 Wait for the terminal to say that the blockchain is syncing
+
+```bash
+INFO [09-11|14:14:28.922] Block synchronisation started
 ```
-INFO [09-11|14:14:28.922] Block synchronisation started 
-```
-Once block synchronization has started, you can start investigating the blockchain up to the point at which your node is synced. 
+
+Once block synchronization has started, you can start investigating the blockchain up to the point at which your node is synced.
 
 Check the status of your node with `eth.syncing`. You should see something like this
+
 ```javascript
 > eth.syncing
 {
@@ -35,11 +40,13 @@ Check the status of your node with `eth.syncing`. You should see something like 
   startingBlock: 1841089
 }
 ```
+
 This data will be updated as your node syncs with the network.
 
-#### Retrieving Block data
+### Retrieving Block data
 
 You can then get the information about a given block, say block 1830000.
+
 ```javascript
 > eth.getBlock(1830000)
 {
@@ -74,7 +81,7 @@ Notice that the miner address is `"0x0000...0000"` and the nonce is also zeros. 
 - Augur (1)
 - Akasha (1)
 
-#### Retrieving Transaction data
+### Retrieving Transaction data
 
 You can get the information about any transactions from your local node as well, say transaction at index 0 of block 1830000.
 ```javascript
@@ -97,13 +104,16 @@ You can get the information about any transactions from your local node as well,
 }
 ```
 
-#### Retrieving Contract data
+### Retrieving Contract data
 
-You can also retreive the code of any deployed contract, so long as you have the address. Try
+You can also retrieve the code of any deployed contract, so long as you have the address. Try
+
 ```javascript
 eth.getCode("0x832b52302b89fa8E703Cc12dB1B6049984d6fEF7")
 ```
+
 It should print out a giant string of hexadecimal. This is the deployed contract's code. To check the storage of a contract you can use the `eth.getStorageAt()` method.
+
 ```javascript
 eth.getStorageAt("0x832b52302b89fa8E703Cc12dB1B6049984d6fEF7")
 "0x000000000000000000000000000000000000000000004a1d89bb94865ec00000"

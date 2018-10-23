@@ -172,23 +172,30 @@ But this throws an error! `Error: authentication needed: password or unlock`. Ge
 Unlock account 0xabc...
 true
 ```
+
 Now you can send a transaction from account 0.
+
 ```
 > eth.sendTransaction({to: eth.accounts[1], from: eth.accounts[0], value: 100})
 INFO [09-10|17:54:38.360] Setting new local account                address=0x1c29B7832aD2E4731D816E60f767777CbF374E15
 INFO [09-10|17:54:38.361] Submitted transaction                    fullhash=0xdec2391ee28a7997567e5176de995340cf09fd64dc823414f6bf763b1fd1e6ed recipient=0x01058d7d56a216B3F1FF8f41c20ad58888424dE7
 "0xdec2391ee28a7997567e5176de995340cf09fd64dc823414f6bf763b1fd1e6ed"
 ```
+
 Check the balance of account 1.
+
 ```
 > eth.getBalance(eth.accounts[1])
 0
 ```
+
 It's still zero, because we are not running the miner. Start mining to process the transaction. You can stop mining after a block has been processed.
 
 Check the balance of account 1 again.
+
 ```
 > eth.getBalance(eth.accounts[1])
 100
 ```
+
 It should say 100! You have successfull sent a transaction from one account to another over your single node Ethereum network!
