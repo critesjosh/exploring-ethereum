@@ -2,17 +2,19 @@
 
 `geth` is your portal to any Ethereum network. It can take a long time and a lot of storage to sync a full geth node, so there are several sync options that geth comes with. 
 
-A **"full"** sync gets the block headers, the block bodies, and validates every element from genesis block.
+A **"full"** sync gets the block headers, the block bodies, and validates every element from genesis block. (I think this is also called an "archive" node?)
 
 A **"fast"** sync gets the block headers, the block bodies, it processes no transactions until current block - 64. Then it gets a snapshot state and goes like a full synchronization.
 
 A **"light"** sync gets only the current state. To verify elements, it needs to ask to full (archive) nodes for the corresponding tree leaves.
 
+(Note to Josh: There's a great comment covering the big syncing issue many people have in [this comment from an Ethereum developer.](https://github.com/ethereum/mist/issues/3738#issuecomment-390892738), might be worth including?)
+
 In this exercise, we will use "light" sync because it is the fastest.
 
 ### Connect to a testnet
 
-Connecting to testnet with geth is very simple. To connect to the Rinkeby testnet, simple run. We will also launch the console so we can interact with the testnet from the terminal. 
+Connecting to testnet with geth is very simple. To connect to the Rinkeby testnet, simple run (??). We will also launch the console so we can interact with the testnet from the terminal. 
 ```
 $ geth --rinkeby --syncmode fast console
 ```
@@ -101,7 +103,7 @@ You can also retreive the code of any deployed contract, so long as you have the
 ```javascript
 eth.getCode("0x832b52302b89fa8E703Cc12dB1B6049984d6fEF7")
 ```
-It should print out a giant string of hexadecimal. This is they deployed contract code. To check the storage of a contract you can use the `eth.getStorageAt()` method.
+It should print out a giant string of hexadecimal. This is the deployed contract's code. To check the storage of a contract you can use the `eth.getStorageAt()` method.
 ```javascript
 eth.getStorageAt("0x832b52302b89fa8E703Cc12dB1B6049984d6fEF7")
 "0x000000000000000000000000000000000000000000004a1d89bb94865ec00000"
